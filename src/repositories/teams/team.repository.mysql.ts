@@ -5,7 +5,7 @@ import {executeQuery} from '../../db/mysql.connector'
 export default class TeamsRepositoryMySQL implements TeamRepository{
 
     async findAll(): Promise<Team[]> {
-        const sql = `select * from teams`
+        const sql = `select * from teams order by points desc`        
         try {
             const teamsFromDatabase : Team[] = await executeQuery<Team[]>(sql)           
             return teamsFromDatabase
