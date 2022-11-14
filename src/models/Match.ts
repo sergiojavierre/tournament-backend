@@ -1,23 +1,20 @@
 import Team from "./Team"
 
 export default class Match{
-    id: number
-    datetime: Date
+    id: number | undefined
     teamA: Team
     teamB: Team
     //points
-    pointsSet1A: number = 0
-    pointsSet1B: number = 0
-    pointsSet2A: number = 0
-    pointsSet2B: number = 0
-    pointsSet3A: number = 0
-    pointsSet3B: number = 0
-    pointsFairPlayA: number = 0
-    pointsFairPlayB: number = 0
+    pointsSet1A: number | undefined
+    pointsSet1B: number | undefined
+    pointsSet2A: number | undefined
+    pointsSet2B: number | undefined
+    pointsSet3A: number | undefined
+    pointsSet3B: number | undefined
+    pointsFairPlayA: number | undefined
+    pointsFairPlayB: number | undefined
 
     constructor(
-        id: number,
-        datetime: Date,
         teamA: Team,
         teamB: Team,
         pointsSet1A?: number,
@@ -27,21 +24,21 @@ export default class Match{
         pointsSet3A?: number,
         pointsSet3B?: number,
         pointsFairPlayA?: number,
-        pointsFairPlayB?: number
+        pointsFairPlayB?: number,
+        id?: number
     ) {
-        this.id = id;
-        this.datetime = datetime;
         this.teamA = teamA;
         this.teamB = teamB;
+        this.id = id;
         //points
-        if(pointsSet1A)this.pointsSet1A = pointsSet1A;
-        if(pointsSet1B)this.pointsSet1B = pointsSet1B;
-        if(pointsSet2A)this.pointsSet2A = pointsSet2A;
-        if(pointsSet2B)this.pointsSet2B = pointsSet2B;
-        if(pointsSet3A)this.pointsSet3A = pointsSet3A;
-        if(pointsSet3B)this.pointsSet3B = pointsSet3B;
-        if(pointsFairPlayA)this.pointsFairPlayA = pointsFairPlayA;
-        if(pointsFairPlayB)this.pointsFairPlayB = pointsFairPlayB;
+        this.pointsSet1A = pointsSet1A;
+        this.pointsSet1B = pointsSet1B;
+        this.pointsSet2A = pointsSet2A;
+        this.pointsSet2B = pointsSet2B;
+        this.pointsSet3A = pointsSet3A;
+        this.pointsSet3B = pointsSet3B;
+        this.pointsFairPlayA = pointsFairPlayA;
+        this.pointsFairPlayB = pointsFairPlayB;
                
     }
 }

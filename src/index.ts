@@ -17,9 +17,11 @@ const port = process.env.PORT
 //routers
 import { routerGroups } from './routes/groups.router';
 import { routerTeams } from './routes/teams.router';
+import { routerMatches } from './routes/matches.router';
 
 app.use('/groups',routerGroups)
 app.use('/teams',routerTeams)
+app.use('/matches',routerMatches)
 
 app.listen(process.env.PORT, () => {
   console.log(`Application started on port ${port}`);

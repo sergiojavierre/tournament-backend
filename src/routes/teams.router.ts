@@ -17,16 +17,6 @@ router.get('/', async (req: Request, res: Response) => {
     }
 })
 
-router.get('/:name', async (req: Request, res: Response) => {
-    try {
-        const team = await teamsRepository.findOne(req.params.name)
-        res.send(team)
-    }
-    catch (error) {
-        res.send(error)
-    }
-})
-
 router.post('/', async (req: Request, res: Response) => {
     const name = req.body.name
     const details = req.body.details

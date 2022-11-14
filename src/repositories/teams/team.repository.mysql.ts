@@ -21,20 +21,9 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
         }
     }
 
-    async findOne(name:String): Promise<Team | undefined> {
-        const sql = `select * from teams where name = "${name}"`
-        try {
-            const teams : Team[] = await executeQuery<Team[]>(sql)           
-            return teams[0]
-        }
-        catch (error) {
-            console.error(error);
-            return undefined 
-        }
-    }
 
     async add(team: Team): Promise<Team | undefined> {
-        const sql = `insert into teams (name, details, image, \`group\`) values ("${team.name}","${team.details}","${team.image}", "${team.group.name}")`        
+        const sql = `insert into teams (name, details, image, \`group\`) values ("${team.name}","${team.details}","${team.image}", "${team.group?.name}")`        
         try {
             await executeQuery<Team>(sql)           
             return team
