@@ -15,8 +15,10 @@ app.use(cors(options));
 const port = process.env.PORT
 
 //routers
+import { routerGroups } from './routes/groups.router';
 import { routerTeams } from './routes/teams.router';
 
+app.use('/groups',routerGroups)
 app.use('/teams',routerTeams)
 
 app.listen(process.env.PORT, () => {

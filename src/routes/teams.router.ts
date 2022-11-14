@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express'
+import Group from '../models/Group'
 import Team from '../models/Team'
 import TeamsRepositoryMySQL from '../repositories/teams/team.repository.mysql'
 
@@ -27,7 +28,11 @@ router.get('/:name', async (req: Request, res: Response) => {
 })
 
 router.post('/', async (req: Request, res: Response) => {
-    const data : Team =  req.body
+    const name = req.body.name
+    const details = req.body.details
+    const image = req.body.image
+    const group = new Group(req.body.group)
+    const data = new Team(name, details, image, group)
     const team = await teamsRepository.add(data)
     res.send(team)
 })

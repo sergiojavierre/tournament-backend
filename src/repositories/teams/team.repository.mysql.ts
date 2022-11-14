@@ -1,3 +1,4 @@
+import Group from '../../models/Group'
 import Team from '../../models/Team'
 import TeamRepository from "./team.repository";
 import {executeQuery} from '../../db/mysql.connector'
@@ -5,10 +6,14 @@ import {executeQuery} from '../../db/mysql.connector'
 export default class TeamsRepositoryMySQL implements TeamRepository{
 
     async findAll(): Promise<Team[]> {
-        const sql = `select * from teams order by points desc`        
+        const sql = `select * from teams order by points desc`     
+        const teams : Team[] = []
         try {
-            const teamsFromDatabase : Team[] = await executeQuery<Team[]>(sql)           
-            return teamsFromDatabase
+            const data: any[] = await executeQuery<Team[]>(sql)
+            data.forEach(item => {
+                teams.push(new Team(item.name, item.details, item.image, new Group(item.group)))
+            })
+            return teams
         }
         catch (error) {
             console.error(error);
@@ -16,7 +21,7 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
         }
     }
 
-    async findOne(name:String): Promise<Team> {
+    async findOne(name:String): Promise<Team | undefined> {
         const sql = `select * from teams where name = "${name}"`
         try {
             const teams : Team[] = await executeQuery<Team[]>(sql)           
@@ -24,19 +29,19 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
         }
         catch (error) {
             console.error(error);
-            return new Team('','','') 
+            return undefined 
         }
     }
 
-    async add(team: Team): Promise<Team>{
-        const sql = `insert into teams values ("${team.name}","${team.details}","${team.image}")`
+    async add(team: Team): Promise<Team | undefined> {
+        const sql = `insert into teams (name, details, image, \`group\`) values ("${team.name}","${team.details}","${team.image}", "${team.group.name}")`        
         try {
             await executeQuery<Team>(sql)           
             return team
         }
         catch (error) {
             console.error(error);
-            return new Team('','',''); 
+            return undefined; 
         }
     }
 
