@@ -1,7 +1,7 @@
 import Team from "./Team"
 
 export default class Match{
-    id: number | undefined
+    id: number | undefined
     teamA: Team
     teamB: Team
     //points

@@ -18,8 +18,34 @@ export default class MatchRepositoryMySQL implements MatchRepository {
         join teams tB on m.teamB = tB.name  
         order by m.datetime desc`
         try {
-            const results : Match[] = await executeQuery<Match[]>(sql)           
-            return results;
+            const results: any[] = await executeQuery<any[]>(sql) 
+            const matches : Match[]= []
+            results.forEach((item) => {
+                matches.push(
+                    new Match(
+                        new Team(
+                            item.teamA,
+                            undefined,
+                            item.teamAImage
+                        ),
+                        new Team(
+                            item.teamA,
+                            undefined,
+                            item.teamAImage
+                        ),
+                        item.pointsSet1A,
+                        item.pointsSet1B,
+                        item.pointsSet2A,
+                        item.pointsSet2B,
+                        item.pointsSet3A,
+                        item.pointsSet3B,
+                        item.pointsFairPlayA,
+                        item.pointsFairPlayB,
+                        item.id
+                    )
+                )
+            })
+            return matches;
         }
         catch (error) {
             console.error(error);
