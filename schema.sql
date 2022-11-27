@@ -11,7 +11,7 @@ create table teams (
     name varchar(255) not null primary key,
     details varchar(255),
     image varchar(255),
-    points int unsigned not null,
+    points int unsigned,
     `group` varchar(255),
     foreign key (`group`) references groups(name)
 );

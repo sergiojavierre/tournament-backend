@@ -11,7 +11,7 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
         try {
             const data: any[] = await executeQuery<Team[]>(sql)
             data.forEach(item => {
-                teams.push(new Team(item.name, item.details, item.image, new Group(item.group)))
+                teams.push(new Team(item.name, item.details, item.image, new Group(item.group), item.points))
             })
             return teams
         }

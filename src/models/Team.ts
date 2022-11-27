@@ -8,14 +8,11 @@ export default class Team{
     points: number | undefined
     group: Group | undefined
 
-    constructor(name: string, details?: string, image?: string, group?: Group) {
+    constructor(name: string, details?: string, image?: string, group?: Group, points?: number) {
         this.name = name
         this.details = details
         this.image = image
         this.group = group
-    }
-
-    setPoints(points: number) {
         this.points = points
     }
 }

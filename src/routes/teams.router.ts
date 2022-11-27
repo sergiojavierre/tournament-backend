@@ -22,7 +22,7 @@ router.post('/', async (req: Request, res: Response) => {
     const details = req.body.details
     const image = req.body.image
     const group = new Group(req.body.group)
-    const data = new Team(name, details, image, group)
+    const data = new Team(name, details, image, group, 0)
     const team = await teamsRepository.add(data)
     res.send(team)
 })
