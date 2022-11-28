@@ -7,9 +7,9 @@ const router = express.Router()
 
 const teamsRepository = new TeamsRepositoryMySQL()
 
-router.get('/', async (req: Request, res: Response) => {
+router.get('/:group', async (req: Request, res: Response) => {
     try {
-        const teams = await teamsRepository.findAll()
+        const teams = await teamsRepository.findAll(req.params.group)
         res.send(teams)
     }
     catch (error) {
