@@ -1,7 +1,3 @@
-export default class Group{
+export default interface Group{
     name: string;
-
-    constructor(name: string) {
-        this.name = name;
-    }
 }

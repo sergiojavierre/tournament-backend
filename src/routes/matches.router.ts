@@ -19,8 +19,8 @@ router.get('/', async ( req: Request, res: Response) => {
 
 router.post('/', async (req: Request, res: Response) => {
     //teams
-    const teamA = req.body.teamA.name
-    const teamB = req.body.teamB.name
+    const teamA: Team = { name: req.body.teamA.name }
+    const teamB: Team = { name: req.body.teamB.name }
     //points
     const pointsSet1A = req.body.pointsSet1A
     const pointsSet1B = req.body.pointsSet1B
@@ -30,18 +30,18 @@ router.post('/', async (req: Request, res: Response) => {
     const pointsSet3B = req.body.pointsSet3B
     const pointsFairPlayA = req.body.pointsFairPlayA
     const pointsFairPlayB = req.body.pointsFairPlayB
-    const match: Match = new Match(
-        new Team(teamA),
-        new Team(teamB),
-        pointsSet1A,
-        pointsSet1B,
-        pointsSet2A,
-        pointsSet2B,
-        pointsSet3A,
-        pointsSet3B,
-        pointsFairPlayA,
-        pointsFairPlayB
-    )
+    const match: Match = {
+            teamA,
+            teamB,
+            pointsSet1A,
+            pointsSet1B,
+            pointsSet2A,
+            pointsSet2B,
+            pointsSet3A,
+            pointsSet3B,
+            pointsFairPlayA,
+            pointsFairPlayB
+    }
     await matchesRepository.add(match)
     res.send(match)
 })

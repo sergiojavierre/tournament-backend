@@ -1,18 +1,14 @@
 import Group from './Group'
 
-export default class Team{
-
+export default interface Team{
     name: string
-    details: string | undefined
-    image: string | undefined
-    points: number | undefined
-    group: Group | undefined
-
-    constructor(name: string, details?: string, image?: string, group?: Group, points?: number) {
-        this.name = name
-        this.details = details
-        this.image = image
-        this.group = group
-        this.points = points
-    }
+    details?: string
+    image?: string
+    logo?: string
+    group?: Group 
+    pointsMatches?: number
+    pointsSets?: number
+    pointsAchieved?: number
+    pointsAgainst?: number
+    pointsFairplay?: number
 }

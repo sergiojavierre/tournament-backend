@@ -6,12 +6,27 @@ import {executeQuery} from '../../db/mysql.connector'
 export default class TeamsRepositoryMySQL implements TeamRepository{
 
     async findAll(group: String): Promise<Team[]> {
-        const sql = `select * from teams where \`group\` = "${group}" order by points desc`     
+        const sql = `select * from teams where \`group\` = "${group}" order by pointsMatches desc, pointsSets desc, pointsAchieved desc, pointsAgainst desc, pointsFairplay desc`     
         const teams : Team[] = []
         try {
             const data: any[] = await executeQuery<Team[]>(sql)
             data.forEach(item => {
-                teams.push(new Team(item.name, item.details, item.image, new Group(item.group), item.points))
+                const group: Group = {
+                    name: item.group
+                }
+                const team: Team = {
+                    name: item.name,
+                    details: item.details,
+                    image: item.image,
+                    logo: item.logo,
+                    group: group,
+                    pointsMatches: item.pointsMatches,
+                    pointsSets: item.pointsSets,
+                    pointsAchieved: item.pointsAchieved,
+                    pointsAgainst: item.pointsAgainst,
+                    pointsFairplay: item.pointsFairplay
+                }
+                teams.push(team)
             })
             return teams
         }

@@ -21,29 +21,28 @@ export default class MatchRepositoryMySQL implements MatchRepository {
             const results: any[] = await executeQuery<any[]>(sql) 
             const matches : Match[]= []
             results.forEach((item) => {
-                matches.push(
-                    new Match(
-                        new Team(
-                            item.teamA,
-                            undefined,
-                            item.teamAImage
-                        ),
-                        new Team(
-                            item.teamA,
-                            undefined,
-                            item.teamAImage
-                        ),
-                        item.pointsSet1A,
-                        item.pointsSet1B,
-                        item.pointsSet2A,
-                        item.pointsSet2B,
-                        item.pointsSet3A,
-                        item.pointsSet3B,
-                        item.pointsFairPlayA,
-                        item.pointsFairPlayB,
-                        item.id
-                    )
-                )
+                const teamA: Team = {
+                    name: item.teamA,
+                    image: item.teamAImage
+                }
+                const teamB: Team = {
+                    name: item.teamB,
+                    image: item.teamBImage
+                }
+                const match: Match = {
+                    teamA,
+                    teamB,
+                    pointsSet1A: item.pointsSet1,
+                    pointsSet1B: item.pointsSet1B,
+                    pointsSet2A: item.pointsSet2A,
+                    pointsSet2B: item.pointsSet2B,
+                    pointsSet3A: item.pointsSet3A,
+                    pointsSet3B: item.pointsSet3B,
+                    pointsFairPlayA: item.pointsFairPlayA,
+                    pointsFairPlayB: item.pointsFairPlayB,
+                    id: item.id,
+                }
+                matches.push(match)
             })
             return matches;
         }
