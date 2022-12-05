@@ -36,6 +36,25 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
         }
     }
 
+    async findAllReduced(group: String): Promise<Team[]> {
+        const sql = `select name from teams where \`group\` = "${group}"`     
+        const teams : Team[] = []
+        try {
+            const data: any[] = await executeQuery<Team[]>(sql)
+            data.forEach(item => {
+                const team: Team = {
+                    name: item.name
+                }
+                teams.push(team)
+            })
+            return teams
+        }
+        catch (error) {
+            console.error(error);
+            return [] 
+        }
+    }
+
 
     async add(team: Team): Promise<Team | undefined> {
         const sql = `insert into teams (name, details, image, \`group\`) values ("${team.name}","${team.details}","${team.image}", "${team.group?.name}")`        

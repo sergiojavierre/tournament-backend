@@ -15,6 +15,16 @@ router.get('/:group', async (req: Request, res: Response) => {
     }
 })
 
+router.get('/:group/reduced', async (req: Request, res: Response) => {
+    try {
+        const teams = await teamsRepository.findAllReduced(req.params.group)
+        res.send(teams)
+    }
+    catch (error) {
+        res.send(error)
+    }
+})
+
 // TODO: creación de equipos
 /*
 router.post('/', async (req: Request, res: Response) => {
