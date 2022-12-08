@@ -18,6 +18,8 @@ router.get('/', async ( req: Request, res: Response) => {
 })
 
 router.post('/', async (req: Request, res: Response) => {
+    console.log(req.body);
+    
     //teams
     const teamA: Team = { name: req.body.teamA.name }
     const teamB: Team = { name: req.body.teamB.name }
