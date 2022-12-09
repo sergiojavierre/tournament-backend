@@ -68,5 +68,26 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
         }
     }
 
+    async update(team: Team, pointsMatch: Number, setsWin: Number, pointsAchieved: Number, pointsAgainst: Number, pointsFairplay: Number): Promise<Team | undefined>{
+        const sql = `
+            update teams
+            set pointsMatch = pointsMatch + "${pointsMatch}", 
+            pointsSets = pointsSets + "${setsWin}", 
+            pointsAchieved = pointsAchieved + "${pointsAchieved}", 
+            pointsAgainst = pointsAgainst + "${pointsAgainst}", 
+            pointsFairplay = pointsFairplay + "${pointsFairplay}"
+            where name = "${team.name}"
+        `        
+        try {
+            await executeQuery<Team>(sql)           
+            return team
+        }
+        catch (error) {
+            console.error(error);
+            return undefined; 
+        }
+    }
+
+
 
 }

@@ -61,7 +61,7 @@ CREATE TABLE `teams` (
   `name` varchar(255) NOT NULL,
   `details` varchar(255) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
-  `logo` varchar(255) NOT NULL,
+  `logo` varchar(255) DEFAULT NULL,
   `pointsMatches` smallint(5) UNSIGNED DEFAULT 0,
   `pointsSets` smallint(5) UNSIGNED DEFAULT 0,
   `pointsAchieved` smallint(5) UNSIGNED DEFAULT 0,
@@ -92,7 +92,7 @@ ALTER TABLE `matches`
 -- Indices de la tabla `teams`
 --
 ALTER TABLE `teams`
-  ADD PRIMARY KEY (`name`),
+  ADD PRIMARY KEY (`name`,`group`),
   ADD KEY `group` (`group`);
 
 --
