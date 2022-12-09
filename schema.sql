@@ -43,6 +43,7 @@ CREATE TABLE `matches` (
   `teamB` varchar(255) NOT NULL,
   `pointsSet1A` tinyint(3) UNSIGNED DEFAULT 0,
   `pointsSet1B` tinyint(3) UNSIGNED DEFAULT 0,
+  `pointsSet2A` tinyint(3) UNSIGNED DEFAULT 0,
   `pointsSet2B` tinyint(3) UNSIGNED DEFAULT 0,
   `pointsSet3A` tinyint(3) UNSIGNED DEFAULT 0,
   `pointsSet3B` tinyint(3) UNSIGNED DEFAULT 0,

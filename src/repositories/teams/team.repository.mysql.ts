@@ -6,8 +6,10 @@ import {executeQuery} from '../../db/mysql.connector'
 export default class TeamsRepositoryMySQL implements TeamRepository{
 
     async findAll(group: String): Promise<Team[]> {
-        const sql = `select * from teams where \`group\` = "${group}" order by pointsMatches desc, pointsSets desc, pointsAchieved desc, (pointsAchieved-pointsAgainst) desc, pointsFairplay desc`     
-        const teams : Team[] = []
+//        const sql = `select * from teams where \`group\` = "${group}" order by pointsMatches desc, pointsSets desc, pointsAchieved desc, (pointsAchieved-pointsAgainst) desc, pointsFairplay desc`     
+        const sql = `select * from teams where \`group\` = "${group}" order by pointsMatches desc, pointsSets desc, pointsAchieved desc, pointsAgainst asc, pointsFairplay desc`     
+
+        const teams: Team[] = []
         try {
             const data: any[] = await executeQuery<Team[]>(sql)
             data.forEach(item => {
@@ -71,13 +73,15 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
     async update(team: Team, pointsMatch: Number, setsWin: Number, pointsAchieved: Number, pointsAgainst: Number, pointsFairplay: Number): Promise<Team | undefined>{
         const sql = `
             update teams
-            set pointsMatch = pointsMatch + "${pointsMatch}", 
+            set pointsMatches = pointsMatches + "${pointsMatch}", 
             pointsSets = pointsSets + "${setsWin}", 
             pointsAchieved = pointsAchieved + "${pointsAchieved}", 
             pointsAgainst = pointsAgainst + "${pointsAgainst}", 
             pointsFairplay = pointsFairplay + "${pointsFairplay}"
             where name = "${team.name}"
         `        
+        console.log(sql);
+        
         try {
             await executeQuery<Team>(sql)           
             return team

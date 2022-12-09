@@ -55,17 +55,8 @@ export default class MatchRepositoryMySQL implements MatchRepository {
     async add(match: Match): Promise<Match | undefined> {
         try {
             const sql = `
-            insert into matches (
-                teamA, 
-                teamB, 
-                pointsSet1A, 
-                pointsSet1B, 
-                pointsSet2A, 
-                pointsSet2B, 
-                pointsSet3A, 
-                pointsSet3B, 
-                pointsFairPlayA, 
-                pointsFairPlayB)
+            insert into matches 
+                (teamA, teamB, pointsSet1A, pointsSet1B, pointsSet2A, pointsSet2B, pointsSet3A, pointsSet3B, pointsFairPlayA, pointsFairPlayB)
             values (
                 '${match.teamA.name}', 
                 '${match.teamB.name}', 
@@ -78,7 +69,7 @@ export default class MatchRepositoryMySQL implements MatchRepository {
                 '${match.pointsFairPlayA}', 
                 '${match.pointsFairPlayB}'
             )
-            `
+            `            
             await executeQuery<Match[]>(sql)           
             return match;
         }
