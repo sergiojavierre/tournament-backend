@@ -79,9 +79,7 @@ export default class TeamsRepositoryMySQL implements TeamRepository{
             pointsAgainst = pointsAgainst + "${pointsAgainst}", 
             pointsFairplay = pointsFairplay + "${pointsFairplay}"
             where name = "${team.name}"
-        `        
-        console.log(sql);
-        
+        `                
         try {
             await executeQuery<Team>(sql)           
             return team
