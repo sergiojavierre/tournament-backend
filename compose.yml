@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  api:
+    build: ./api
+    restart: always
+    expose:
+      - 8080
+    ports:
+      - "8080:8080"
+
+  db:
+    build: ./db
+    restart: always
+    volumes:
+      - db_data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+  web:
+    image: httpd:latest
+    restart: always
+    volumes:
+      - ./web:/usr/local/apache2/htdocs/
+    ports:
+      - "80:80"
+
+volumes:
+  db_data:
