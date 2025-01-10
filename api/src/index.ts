@@ -6,7 +6,11 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
-const allowedOrigins = ["http://localhost:3000", "http://localhost"];
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost",
+  "http://voley.cpifppiramide.com",
+];
 const options: cors.CorsOptions = {
   origin: allowedOrigins,
 };
